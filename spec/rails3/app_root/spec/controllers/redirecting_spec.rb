@@ -48,5 +48,11 @@ describe OpensocialWap::ActionController::Redirecting do
       get :index, :format => "hash", :opensocial_app_id => '12345'
       response.should redirect_to("?guid=ON&url=http%3A%2F%2Ftest.host%2Fusers%2Fnew")
     end
+
+    it "redirect先も動的に切り替えれる" do
+      controller.class.url_settings = proc{|context|OpensocialWap::Config::DynamicUrl.new(context)}
+      get :index, :format => "hash", :opensocial_app_id => '12345'
+      response.should redirect_to("http://test.host/users/new")
+    end
   end
 end

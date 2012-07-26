@@ -31,7 +31,7 @@ module OpensocialWap
       end
 
       def redirect
-        if @context.request.mobile?
+        if @context.request.respond_to?(:mobile?) && @context.request.mobile?
           {:format => :full, :params => {:guid => "ON"}, :container_host => container_host}
         else
           {:format => :local}
