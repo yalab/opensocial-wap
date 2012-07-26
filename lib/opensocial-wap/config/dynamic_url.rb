@@ -15,7 +15,7 @@ module OpensocialWap
       end
 
       def container_host
-        if @context.request.user_agent.to_s.match(/test/i)
+        if @context.request.mobile? && @context.request.user_agent.to_s.match(/test/i)
           "ma.test.mixi.net"
         else
           "ma.mixi.net"
