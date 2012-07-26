@@ -35,7 +35,7 @@ AppRoot::Application.configure do
   config.active_support.deprecation = :stderr
 
   # OpenSocial WAP Extention
-  
+
   config.opensocial_wap.oauth = OpensocialWap::Config::OAuth.configure do
     OpensocialWap::OAuth::Helpers::BasicHelper.configure do
       consumer_key    'abcdef'

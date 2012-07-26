@@ -7,7 +7,7 @@ describe OpensocialWap::OAuth::Helpers::BasicHelper do
       # without http authorization header
       env = ::Rack::MockRequest.env_for('http://example.com/?opensocial_app_id=877&opensocial_owner_id=23&sample_key=sample_value')
       request = ::Rack::Request.new(env)
-      
+
       OpensocialWap::OAuth::Helpers::BasicHelper.configure do
         consumer_key 'sample_consumer_key'
         consumer_secret 'sample_consumer_secret'
@@ -16,7 +16,7 @@ describe OpensocialWap::OAuth::Helpers::BasicHelper do
       oauth_helper = OpensocialWap::OAuth::Helpers::BasicHelper.new(request)
 
       result = oauth_helper.verify
-      
+
       result.should be_false
     end
   end
@@ -64,7 +64,7 @@ describe OpensocialWap::OAuth::Helpers::BasicHelper do
                                         :method => 'POST',
                                         :params => {'post_sample_key'=>'post_sample_value'})
       request = ::Rack::Request.new(env)
-      
+
       OpensocialWap::OAuth::Helpers::BasicHelper.configure do
         consumer_key 'sample_consumer_key'
         consumer_secret 'sample_consumer_secret'
@@ -72,7 +72,7 @@ describe OpensocialWap::OAuth::Helpers::BasicHelper do
       end
       oauth_helper = OpensocialWap::OAuth::Helpers::BasicHelper.new(request)
       result = oauth_helper.verify
-      
+
       result.should be_false
     end
   end
@@ -81,25 +81,25 @@ describe OpensocialWap::OAuth::Helpers::BasicHelper do
     it "must be verified" do
       env = ::Rack::MockRequest.env_for('http://example.com/?opensocial_app_id=877&opensocial_owner_id=23&sample_key=sample_value',
                                         :method => 'POST',
-                                        :params => {'post_sample_key'=>'post_sample_value'}, 
+                                        :params => {'post_sample_key'=>'post_sample_value'},
                                         'HTTP_AUTHORIZATION' => http_oauth_header('POST', {'post_sample_key'=>'post_sample_value'}))
       request = ::Rack::Request.new(env)
 
-      OpensocialWap::OAuth::Helpers::BasicHelper.configure do 
+      OpensocialWap::OAuth::Helpers::BasicHelper.configure do
         consumer_key 'sample_consumer_key'
         consumer_secret 'sample_consumer_secret'
         proxy_class OpensocialWap::OAuth::RequestProxy::OAuthRackRequestProxy
       end
       oauth_helper = OpensocialWap::OAuth::Helpers::BasicHelper.new(request)
       result = oauth_helper.verify
-          
+
       result.should be_true
     end
 
     it "must fail to verify" do
       env = ::Rack::MockRequest.env_for('http://example.com/?opensocial_app_id=877&opensocial_owner_id=23&sample_key=sample_value',
                                         :method => 'POST',
-                                        :params => {'post_sample_key'=>'post_sample_value'}, 
+                                        :params => {'post_sample_key'=>'post_sample_value'},
                                         'HTTP_AUTHORIZATION'=>http_oauth_header('POST', {'post_sample_key'=>'post_sample_value'}))
       request = ::Rack::Request.new(env)
 
@@ -127,7 +127,7 @@ describe OpensocialWap::OAuth::Helpers::BasicHelper do
                     "oauth_version=\"1.0\""]
     http_oauth_header = "OAuth " + oauth_params.join(', ')
     env = ::Rack::MockRequest.env_for('http://example.com/?opensocial_app_id=877&opensocial_owner_id=23&sample_key=sample_value',
-                                      :method => method, 
+                                      :method => method,
                                       :params => params,
                                       'HTTP_AUTHORIZATION' => http_oauth_header)
     request = ::Rack::Request.new(env)

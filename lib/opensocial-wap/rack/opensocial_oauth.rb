@@ -11,12 +11,12 @@ module OpensocialWap
   module Rack
     class OpensocialOauth
       include ::Rack::Utils
-      
+
       def initialize(app, opt={})
         @app = app
         @helper_class = opt[:helper_class]
       end
-      
+
       def call(env)
         logger = env['rack.logger']
         logger.debug "rack.env['HTTP_AUTHORIZATION'] = #{env['HTTP_AUTHORIZATION']}" if logger
@@ -24,7 +24,7 @@ module OpensocialWap
         verify(env)
 
         status, header, response = @app.call(env)
- 
+
         response = remove_utf8_form_input_tag_from_response(header, response)
         new_response = ::Rack::Response.new(response, status, header)
         new_response.finish
@@ -58,7 +58,7 @@ module OpensocialWap
         end
         if env['Content-Type'] =~ %r!text/html|application/xhtml\+xml!
           type, charset = env['Content-Type'].split(/;\s*charset=/)
-          
+
           if response.respond_to?(:to_str)
             response.body = remove_utf8_form_input_tag(response.to_str)
           elsif response.respond_to?(:each)

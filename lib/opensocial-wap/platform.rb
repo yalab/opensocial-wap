@@ -2,7 +2,7 @@ module OpensocialWap
   module Platform
     # Singleton Pattern
     extend self
-    
+
     def configure(config)
       @config = config
       @session = true
@@ -11,7 +11,7 @@ module OpensocialWap
     def consumer_key(key)
       @consumer_key = key
     end
-    
+
     def consumer_secret(secret)
       @consumer_secret = secret
     end

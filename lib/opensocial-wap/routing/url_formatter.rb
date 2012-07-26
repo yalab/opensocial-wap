@@ -21,15 +21,15 @@ module OpensocialWap
           url
         end
       end
-      
+
       # クエリ形式("?url=エンコードされたURL")のURLを返す.
       # URL は スキーム・FQDNも含む形式にすること.
       def query_url_for(url, params = nil)
         params ||= {}
         params.merge!({ :url => url })
-        "?" + params.select{|k,v| v}.collect{|k,v| "#{k}=#{ERB::Util.url_encode(v)}" }.join('&')
+        "?" + params.select{|k,v| v}.collect{|k,v| "#{k}=#{ERB::Util.url_encode(v)}" }.join('&') # TODO: to_query でいい？
       end
-      
+
       # コンテナのURLを含む形式の完全URL.
       # URL は スキーム・FQDNも含む形式にすること.
       def full_url_for(container_url, app_id, url, params = nil)
@@ -39,7 +39,7 @@ module OpensocialWap
         end
         "#{container_url}/#{app_id}/#{query_url_for(url, params)}"
       end
-      
+
       # URLのうち、プロトコルとホストからなる部分を返す.
       def base_url(host, protocol = nil, port = nil)
         protocol ||= "http"

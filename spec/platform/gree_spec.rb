@@ -6,16 +6,16 @@ describe OpensocialWap::Platform do
     it "sandbox用に、GREE用の初期化が正しく行えること(セッションOFF)" do
       c = Rails::Application::Configuration.new
       OpensocialWap::Platform.gree(c) do
-        consumer_key '1234'
-        consumer_secret 'abcd'
+        consumer_key '(consumer_key)'
+        consumer_secret '(consumer_secret)'
         sandbox true
         session false
       end
 
       c.opensocial_wap.oauth.helper_class.should == OpensocialWap::OAuth::Helpers::BasicHelper
       c.opensocial_wap.oauth.helper_class.proxy_class.should == OpensocialWap::OAuth::RequestProxy::OAuthRackRequestProxy
-      c.opensocial_wap.oauth.helper_class.consumer_key.should == '1234'
-      c.opensocial_wap.oauth.helper_class.consumer_secret.should == 'abcd'
+      c.opensocial_wap.oauth.helper_class.consumer_key.should == '(consumer_key)'
+      c.opensocial_wap.oauth.helper_class.consumer_secret.should == '(consumer_secret)'
       c.opensocial_wap.oauth.helper_class.api_endpoint.should == 'http://os-sb.gree.jp/api/rest/'
       c.opensocial_wap.url.container_host == 'mgadget-sb.gree.jp'
       c.opensocial_wap.url.default.should == {:format => :query, :params => { :guid => 'ON' }}
@@ -27,16 +27,16 @@ describe OpensocialWap::Platform do
     it "本番用に、GREE用の初期化が正しく行えること(セッションON)" do
       c = Rails::Application::Configuration.new
       OpensocialWap::Platform.gree(c) do
-        consumer_key '1234'
-        consumer_secret 'abcd'
+        consumer_key '(consumer_key)'
+        consumer_secret '(consumer_secret)'
         sandbox false
         session true
       end
 
       c.opensocial_wap.oauth.helper_class.should == OpensocialWap::OAuth::Helpers::BasicHelper
       c.opensocial_wap.oauth.helper_class.proxy_class.should == OpensocialWap::OAuth::RequestProxy::OAuthRackRequestProxy
-      c.opensocial_wap.oauth.helper_class.consumer_key.should == '1234'
-      c.opensocial_wap.oauth.helper_class.consumer_secret.should == 'abcd'
+      c.opensocial_wap.oauth.helper_class.consumer_key.should == '(consumer_key)'
+      c.opensocial_wap.oauth.helper_class.consumer_secret.should == '(consumer_secret)'
       c.opensocial_wap.oauth.helper_class.api_endpoint.should == 'http://os.gree.jp/api/rest/'
       c.opensocial_wap.url.container_host == 'mgadget.gree.jp'
       c.opensocial_wap.url.default.should == {:format => :query, :params => { :guid => 'ON' }}

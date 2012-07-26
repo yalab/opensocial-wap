@@ -22,7 +22,7 @@ module ActionController
           self.url_settings = app_config.opensocial_wap[:url]
         end
 
-        include OpensocialWap::ActionController::Redirecting    
+        include OpensocialWap::ActionController::Redirecting
       end
     end
   end

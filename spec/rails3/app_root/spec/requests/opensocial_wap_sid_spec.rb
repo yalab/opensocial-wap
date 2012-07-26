@@ -10,14 +10,13 @@ describe OpensocialWap::Session::OpensocialWapSid do
       page.reset!
     end
 
-    it "OAuth検証にパスし、opensocial_viewer_idパラメータが存在すれば、セッションキーはopensocial_viewer_idの値になること." do
-
+    pending "OAuth検証にパスし、opensocial_viewer_idパラメータが存在すれば、セッションキーはopensocial_viewer_idの値になること." do
       # テストのために、強制的に OAuth 検証パス状態に設定し、opensocial_viewer_id をパラメターにセット.
       # OpensocialWapSidEnabler 内で env を操作する.
       opensocial_viewer_id = "xYke81b0aHLvbafdsa"
       app.config.enable_opensocial_wap_sid = true
       app.config.opensocial_wap_sid_with_parameter = {"opensocial_viewer_id" => opensocial_viewer_id}
-      
+
       visit edit_user_path(users(:alice))
 
       page.should have_content opensocial_viewer_id
@@ -26,7 +25,7 @@ describe OpensocialWap::Session::OpensocialWapSid do
       fill_in "user_age", :with => 14
 
       click_button "Update User"
-      
+
       page.should have_content "User was successfully updated."
       page.should have_content "14"
     end
@@ -45,7 +44,7 @@ describe OpensocialWap::Session::OpensocialWapSid do
       fill_in "user_age", :with => 14
 
       click_button "Update User"
-      
+
       # cookie にセッションキーを保存するので、それでもセッションは有効になる.
       page.should have_content "User was successfully updated."
       page.should have_content "14"
@@ -60,7 +59,7 @@ describe OpensocialWap::Session::OpensocialWapSid do
       opensocial_viewer_id = "xYke81b0aHLvbafdsa"
       app.config.enable_opensocial_wap_sid = true
       app.config.opensocial_wap_sid_with_parameter = {"opensocial_viewer_id" => opensocial_viewer_id}
-      
+
       visit edit_user_path(users(:alice))
 
       page.should_not have_content opensocial_viewer_id
@@ -69,7 +68,7 @@ describe OpensocialWap::Session::OpensocialWapSid do
       fill_in "user_age", :with => 14
 
       click_button "Update User"
-      
+
       page.should have_content "User was successfully updated."
       page.should have_content "14"
     end

@@ -7,7 +7,7 @@ module OpensocialWap
       class BasicHelper < Base
 
         DEFAULT_PROXY_CLASS = ::OpensocialWap::OAuth::RequestProxy::OAuthRackRequestProxy
-        
+
         def verify(options = nil)
           request_proxy = self.class.proxy_class.new(@request)
 
@@ -18,19 +18,19 @@ module OpensocialWap
                                                    request_proxy.parameters['oauth_token'],
                                                    request_proxy.parameters['oauth_token_secret'])
           signature = ::OAuth::Signature.build(request_proxy, opts)
-          
+
           if logger = @request.logger
             logger.debug "oauth signature : #{::OAuth::Signature.sign(request_proxy, opts)}"
             logger.debug "=== OauthHandler OAuth verification: ==="
             logger.debug "  authorization header: #{@request.env['HTTP_AUTHORIZATION']}"
             logger.debug "  base string:          #{signature.signature_base_string}"
-            logger.debug "  signature:            #{signature.signature}"      
+            logger.debug "  signature:            #{signature.signature}"
           end
 
           signature.verify
         rescue Exception => e
           false
-        end        
+        end
 
         def authorization_header(api_request, options = nil)
           opts = { :consumer => consumer }
@@ -46,8 +46,8 @@ module OpensocialWap
           self.class.api_endpoint
         end
 
-        def self.configure(&blk)
-          instance_eval(&blk)
+        def self.configure(&block)
+          instance_eval(&block)
           self
         end
 
@@ -59,7 +59,7 @@ module OpensocialWap
           end
           @consumer_key if @consumer_key
         end
-        
+
         def self.consumer_secret(arg = nil)
           if arg
             @consumer_secret = arg
@@ -88,14 +88,13 @@ module OpensocialWap
           @proxy_class || DEFAULT_PROXY_CLASS
         end
 
-        def consumer 
+        def consumer
           @consumer ||= ::OAuth::Consumer.new(self.class.consumer_key, self.class.consumer_secret)
         end
 
         def access_token
           @access_token
         end
-
       end
     end
   end

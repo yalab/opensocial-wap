@@ -8,10 +8,10 @@ describe OpensocialWap::Routing::UrlFor do
 
     def index
       user = User.new
-      
+
       case params[:url_format]
       when 'original'
-        @u = url_for(user) 
+        @u = url_for(user)
       else
         @u = url_for(user, self.class.url_settings.default.merge(:format => params[:format].to_sym))
       end

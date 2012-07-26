@@ -5,7 +5,7 @@ describe OpensocialWap::OAuth::RequestProxy::OAuthRackRequestProxy do
 
   it "signature_base_stringが正しく構築できること" do
     pending "TODO:値をセット"
-    
+
     uri = 'http://example.com/?opensocial_app_id=877&opensocial_owner_id=23&sample_key=sample_value'
     opts = {
       :method => "POST",

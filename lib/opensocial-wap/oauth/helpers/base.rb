@@ -6,11 +6,11 @@ module OpensocialWap
         def initialize(request = nil)
           @request = request
         end
-        
+
         def verify(options = nil)
           raise NotImplementedError
         end
-        
+
         def authorization_header(api_request, options = nil)
           raise NotImplementedError
         end

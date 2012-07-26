@@ -16,7 +16,7 @@ describe OpensocialWap::Helpers::UrlHelper do
         helper.url_for(users(:alice)).should == "/users/1"
       end
     end
-    
+
     context "コントローラで opensocial_wap を指定している場合" do
       it "設定で指定した形式の URL を返すこと" do
         controller = OpensocialWapController.new
@@ -39,7 +39,7 @@ describe OpensocialWap::Helpers::UrlHelper do
         link = helper.link_to("Alice", user_path(users(:alice)))
         link.should == %Q|<a href="/users/1">Alice</a>|
       end
-    
+
       it "リンクのURLが、通常の形式になること(モデルを引数にした場合)" do
         link = helper.link_to("Alice", users(:alice))
         link.should == %Q|<a href="/users/1">Alice</a>|
@@ -71,7 +71,7 @@ describe OpensocialWap::Helpers::UrlHelper do
         link_full.should == %Q|<a href="http://container.example.com/12345/?guid=ON&amp;url=http%3A%2F%2Ftest.host%2Fusers%2F1">Alice</a>|
       end
     end
-    
+
     describe OpensocialWapController do
 
       before do
@@ -82,7 +82,7 @@ describe OpensocialWap::Helpers::UrlHelper do
         link = helper.link_to("Alice", user_path(users(:alice)))
         link.should == %Q|<a href="http://container.example.com/12345/?guid=ON&amp;url=http%3A%2F%2Ftest.host%2Fusers%2F1">Alice</a>|
       end
-    
+
       it "リンクのURLが、Opensocial WAP :full形式になること(モデルを引数にした場合)" do
         link = helper.link_to("Alice", users(:alice))
         link.should == %Q|<a href="http://container.example.com/12345/?guid=ON&amp;url=http%3A%2F%2Ftest.host%2Fusers%2F1">Alice</a>|
@@ -124,7 +124,7 @@ describe OpensocialWap::Helpers::UrlHelper do
         html = helper.button_to("Alice", user_path(users(:alice)))
         html.should include %Q|action="/users/1"|
       end
-    
+
       it "ボタンのURLが、通常の形式になること(モデルを引数にした場合)" do
         html = helper.button_to("Alice", users(:alice))
         html.should include %Q|action="/users/1"|
@@ -161,7 +161,7 @@ describe OpensocialWap::Helpers::UrlHelper do
         html = helper.button_to("Alice", user_path(users(:alice)))
         html.should include %Q|action="http://container.example.com/12345/?guid=ON&amp;url=http%3A%2F%2Ftest.host%2Fusers%2F1"|
       end
-    
+
       it "ボタンのURLが、Opensocial WAP :full形式になること(モデルを引数にした場合)" do
         html = helper.button_to("Alice", users(:alice))
         html.should include %Q|action="http://container.example.com/12345/?guid=ON&amp;url=http%3A%2F%2Ftest.host%2Fusers%2F1"|
@@ -213,12 +213,12 @@ describe OpensocialWap::Helpers::UrlHelper do
 
   describe "#link_to_unless_current" do
     context OpensocialWapController do
-      
+
       before do
         set_controller(OpensocialWapController.new)
       end
 
-      it "link_to_unless_current についても、OpenSocial WAP形式のURLがセットされること" do        
+      it "link_to_unless_current についても、OpenSocial WAP形式のURLがセットされること" do
         link = helper.link_to_unless_current("Index", { :controller => "users", :action => "index" })
         link.should == %Q|<a href="http://container.example.com/12345/?guid=ON&amp;url=http%3A%2F%2Ftest.host%2Fusers">Index</a>|
       end
@@ -228,6 +228,19 @@ describe OpensocialWap::Helpers::UrlHelper do
         controller.request.path = '/users'
 
         helper.link_to_unless_current("Index", { :controller => "users", :action => "index" }).should == 'Index'
+      end
+    end
+  end
+
+  describe "#extract_url_settings" do
+    context OpensocialWapController do
+      before do
+        set_controller(OpensocialWapController.new)
+      end
+
+      it "url_settings オプションは Proc を受け取れる" do
+        link = helper.link_to("Index", { :controller => "users", :action => "index" }, :url_settings => proc{|context|{:format => :local}})
+        link.should == %Q|<a href="http://test.host/users">Index</a>|
       end
     end
   end

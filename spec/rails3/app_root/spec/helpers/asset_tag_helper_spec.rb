@@ -16,10 +16,9 @@ describe OpensocialWap::Helpers::AssetTagHelper do
         helper.image_path("edit.png").should == "/images/edit.png"
       end
     end
-    
-    context "コントローラで opensocial_wap を指定している場合" do
 
-      it "初期化時に指定した形式の URL を返すこと" do
+    context "コントローラで opensocial_wap を指定している場合" do
+      pending "初期化時に指定した形式の URL を返すこと" do
         set_controller(OpensocialWapController.new)
         helper.stub!(:params).and_return({ :opensocial_app_id => '12345' })
         helper.image_path("edit.png").should == "http://test.host/images/edit.png"

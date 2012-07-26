@@ -3,15 +3,15 @@
 module OpensocialWap
   module Session
     module OpensocialWapSid
-      
+
       def self.included(base)
         base.class_eval do
           # クエリに含まれる opensocial_viewer_id (もしなければ opensocial_owner_id) を
           # セッションのキーにする.
           # cookie は使用しないので、session store で CookieStore を指定しないこと.
           #
-          # session store の指定で行った設定が反映されるかどうかは、session store の実装次第. 
-          # たとえば、:expire_after の設定は、:mem_cache_store では反映されるが、他の session 
+          # session store の指定で行った設定が反映されるかどうかは、session store の実装次第.
+          # たとえば、:expire_after の設定は、:mem_cache_store では反映されるが、他の session
           # store でも反映されるとは限らない.
           #
           # なお、jpmobile と併用する場合、jpmobile 関係の middleware が実行されるまでは、
@@ -27,7 +27,7 @@ module OpensocialWap
                 sid = request.cookies[@key]
                 sid ||= request.GET[@key] unless @cookie_only
               end
-#puts "##### sid : #{sid} ###"
+              # puts "##### sid : #{sid} ###"
               sid
             end
           end
@@ -64,7 +64,7 @@ module OpensocialWap
             opensocial_user_id = params['opensocial_viewer_id'] || params['opensocial_owner_id']
           end
         end
-      end    
+      end
     end
   end
 end

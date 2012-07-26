@@ -69,7 +69,7 @@ describe OpensocialWap::Helpers::FormTagHelper do
   describe "#form_for" do
 
     context NonOpensocialWapController do
-      
+
       before do
         set_controller(NonOpensocialWapController.new)
       end
@@ -97,7 +97,7 @@ describe OpensocialWap::Helpers::FormTagHelper do
       end
     end
     context OpensocialWapController do
-      
+
       before do
         set_controller(OpensocialWapController.new)
       end

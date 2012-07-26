@@ -11,7 +11,7 @@ describe OpensocialWap::Routing::UrlFormatter do
       plain_url.should == 'http://app.example.com/foo?bar=buz'
     end
 
-    it "プロトコル・ポートを指定した場合に、plain形式のURLが正しく計算できること" do 
+    it "プロトコル・ポートを指定した場合に、plain形式のURLが正しく計算できること" do
       url = "/foo?bar=buz"
       host = "app.example.com"
       protocol = "https"

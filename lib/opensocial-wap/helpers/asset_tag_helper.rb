@@ -6,7 +6,7 @@ module OpensocialWap
     module AssetTagHelper
       include UrlHelper
       include ::ActionView::Helpers::AssetTagHelper
-      
+
       # compute_public_path を上書き.
       # 初期化時に、opensocial_wap[:url] でURL形式が指定されていれば、パスを
       # OpenSocial 用のものに書き換える.

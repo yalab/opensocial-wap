@@ -6,13 +6,13 @@ module OpensocialWap
     module Redirecting
       include ::OpensocialWap::Routing::UrlFor
 
-      # Opensocial WAP Extension の URL設定中の　:redirect で指定した形式のURLにリダイレクトする.
+      # Opensocial WAP Extension の URL設定中の :redirect で指定した形式のURLにリダイレクトする.
       def redirect_to(options = {}, response_status = {})
         super
       end
 
       private
-      
+
       # opensocial_wap[:url].redirect で指定した形式のURLを返す.
       def _compute_redirect_to_location(options)
         url = super

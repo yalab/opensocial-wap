@@ -4,7 +4,7 @@
 class OpensocialWapController < ApplicationController
 
   opensocial_wap
-  
+
   def index
   end
 end

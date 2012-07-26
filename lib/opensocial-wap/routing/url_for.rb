@@ -8,31 +8,35 @@ module OpensocialWap
 
       # OpenSocial WAP Extension 用 url_for.
       def url_for(options = nil, url_settings = nil)
+        if url_settings.kind_of? Proc
+          url_settings = url_settings.call(self)
+        end
+
         url_format = url_settings && url_settings[:format]
         return super(options) unless url_format
 
         # アプリケーションサーバの完全URL(:only_path => false を指定したときのURL)を作成.
         options ||= {}
-        url = case options
-              when String
-                opts = options_for_plain_url(nil, url_settings)
-                plain_url = plain_url_for(options, opts[:host], opts[:protocol], opts[:port])
-                unless plain_url
-                  # 外部URLであれば、そのまま返す.
-                  return options
-                end
-                plain_url
-              when Hash
-                opts = options_for_plain_url(options, url_settings)
-                url_for(opts)
-              else
-                opts = options_for_plain_url(nil, url_settings)
-                polymorphic_url(options, opts)
-              end
+        case options
+        when String
+          opts = options_for_plain_url(nil, url_settings)
+          plain_url = plain_url_for(options, opts[:host], opts[:protocol], opts[:port])
+          unless plain_url
+            # 外部URLであれば、そのまま返す.
+            return options
+          end
+          url = plain_url
+        when Hash
+          opts = options_for_plain_url(options, url_settings)
+          url = url_for(opts)
+        else
+          opts = options_for_plain_url(nil, url_settings)
+          url = polymorphic_url(options, opts)
+        end
         # url_format に従って、URLを書き換える.
         format_url(url, url_settings)
       end
-      
+
       private
 
       # URL を OpenSocial WAP Extension 用に書き換える.
@@ -47,7 +51,7 @@ module OpensocialWap
           container_url = base_url(url_settings[:container_host], protocol)
           full_url_for(container_url, params[:opensocial_app_id], url, url_settings[:params])
         else
-          url 
+          url
         end
       end
 

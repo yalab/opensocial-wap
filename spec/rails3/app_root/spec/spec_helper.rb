@@ -11,7 +11,9 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 silence_warnings {RAILS_ENV = ENV['RAILS_ENV']}
 
 # Run the migrations
-ActiveRecord::Migrator.migrate("#{Rails.root}/db/migrate")
+silence_stream(STDOUT) do
+  ActiveRecord::Migrator.migrate("#{Rails.root}/db/migrate")
+end
 
 RSpec.configure do |config|
   config.mock_with :rspec

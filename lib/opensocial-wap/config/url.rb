@@ -3,13 +3,13 @@
 # Url 関係設定.
 module OpensocialWap
   module Config
-    module Url
-      # Singleton Pattern
-      extend self
+    class Url
+      def self.configure(*args, &block)
+        new(*args).tap{|o|o.instance_eval(&block)}
+      end
 
-      def configure(&blk)
-        instance_eval(&blk)
-        self
+      def initialize(context = nil)
+        @context = context
       end
 
       def container_host(host = nil)
@@ -42,11 +42,11 @@ module OpensocialWap
 
       private
 
-      # options の :format が　:full で、かつ :container_host が
+      # options の :format が :full で、かつ :container_host が
       # 指定されていないときに、@container_host をセットする.
       def assure_container_host(options)
         if options[:format] == :full && options[:container_host].nil?
-          options[:container_host] = @container_host
+          options[:container_host] = container_host
         end
         options
       end

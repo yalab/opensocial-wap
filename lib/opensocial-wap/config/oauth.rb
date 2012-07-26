@@ -6,9 +6,9 @@ module OpensocialWap
     module OAuth
       # Singleton Pattern
       extend self
-      
-      def configure(&blk)
-        instance_eval(&blk)
+
+      def configure(&block)
+        instance_eval(&block)
         self
       end
 

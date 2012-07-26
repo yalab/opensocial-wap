@@ -12,6 +12,7 @@ require 'opensocial-wap/session/opensocial_wap_sid'
 require 'opensocial-wap/platform'
 require 'opensocial-wap/platform/gree'
 require 'opensocial-wap/platform/mixi'
+require 'opensocial-wap/platform/mixi2'
 require 'opensocial-wap/platform/mobage'
 
 module OpensocialWap
@@ -22,10 +23,10 @@ module OpensocialWap
     initializer "opensocial-wap.initialize" do |app|
     end
 
-    initializer 'opensocial-wap.load_middleware', :after=> :load_config_initializers do
+    initializer 'opensocial-wap.load_middleware', :after => :load_config_initializers do
       if config.opensocial_wap && config.opensocial_wap.oauth
         helper_class = config.opensocial_wap.oauth.helper_class
-        
+
         if helper_class
           puts "opensocial-wap is enabled with #{helper_class}"
           config.app_middleware.insert_before ActionDispatch::Cookies, OpensocialWap::Rack::OpensocialOauth, :helper_class => helper_class

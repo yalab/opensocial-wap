@@ -12,10 +12,10 @@ describe OpensocialWap::OAuth::ClientHelper do
         api_endpoint    'http://api.example.com/rest/'
       end
       oauth_helper = OpensocialWap::OAuth::Helpers::BasicHelper.new
-      client_helper = OpensocialWap::OAuth::ClientHelper.new(oauth_helper, 
-                                                             'people', 
-                                                             '@me', 
-                                                             '@self', 
+      client_helper = OpensocialWap::OAuth::ClientHelper.new(oauth_helper,
+                                                             'people',
+                                                             '@me',
+                                                             '@self',
                                                              :format => 'atom', :fields => 'gender,address')
       client_helper.uri.to_s.should == "http://api.example.com/rest/people/@me/@self?fields=gender%2Caddress&format=atom"
     end

@@ -10,7 +10,7 @@ module OpensocialWap::OAuth::Client
 
     def self.included(base)
       base.class_eval do
-        
+
         def oauth_parameters
           {
             'oauth_body_hash'        => options[:body_hash],
