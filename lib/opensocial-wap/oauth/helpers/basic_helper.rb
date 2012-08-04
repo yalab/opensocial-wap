@@ -36,7 +36,7 @@ module OpensocialWap
           opts = { :consumer => consumer }
           opts[:token] = access_token if access_token
           if @request
-            opts[:xoauth_requestor_id] = @request.params['opensocial_viewer_id'] || @request.params['opensocial_owner_id']
+            opts[:xoauth_requestor_id] = @request.params['opensocial_viewer_id'] || @request.params['opensocial_owner_id'] || @request.session.try(:[], :opensocial_viewer_id)
           end
           oauth_client_helper = ::OAuth::Client::Helper.new(api_request, opts.merge(options))
           oauth_client_helper.header
