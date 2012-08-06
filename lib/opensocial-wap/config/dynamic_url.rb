@@ -15,7 +15,7 @@ module OpensocialWap
       end
 
       def container_host
-        if @context.request.mobile? && @context.request.user_agent.to_s.match(/test/i)
+        if request.mobile? && request.user_agent.to_s.match(/test/i)
           "ma.test.mixi.net"
         else
           "ma.mixi.net"
@@ -23,7 +23,7 @@ module OpensocialWap
       end
 
       def default
-        if @context.request.mobile?
+        if request.mobile?
           {:format => :query, :params => {:guid => "ON"}}
         else
           {:format => :local}
@@ -31,7 +31,7 @@ module OpensocialWap
       end
 
       def redirect
-        if @context.request.respond_to?(:mobile?) && @context.request.mobile?
+        if request.respond_to?(:mobile?) && request.mobile?
           {:format => :full, :params => {:guid => "ON"}, :container_host => container_host}
         else
           {:format => :local}
@@ -40,6 +40,23 @@ module OpensocialWap
 
       def public_path
         {:format => :local}
+      end
+
+      private
+
+      #
+      # @context は controller を想定している
+      # しかし呼び出す側が request の中で self を渡したい場合もある
+      # そうなると Object.new.request みたいなものを作らないといけなくて面倒
+      # かといって呼び出し側で毎回 controller.request と書きたくない
+      # のでこっちの request メソッドで吸収する
+      #
+      def request
+        if @context.respond_to?(:request)
+          @context.request
+        else
+          @context
+        end
       end
     end
   end

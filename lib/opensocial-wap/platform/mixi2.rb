@@ -31,7 +31,11 @@ module OpensocialWap
         @config.opensocial_wap.url = proc{|context|OpensocialWap::Config::DynamicUrl.new(context)}
       else
         # 静的の設定を動的に切り替え
+        # こちらは柔軟性がないのでやめ
         @config.opensocial_wap.url = proc{|context|
+          if context.respond_to(:request)
+            context = context.request
+          end
           if context.request.mobile?
             # fp
             OpensocialWap::Config::Url.configure do

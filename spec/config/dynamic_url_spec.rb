@@ -20,4 +20,12 @@ describe OpensocialWap::Config::DynamicUrl do
     config = OpensocialWap::Config::DynamicUrl.new(ctx)
     config.container_host.should == "ma.mixi.net"
   end
+
+  it "reqest自体を渡せる(というか渡した方がいい)" do
+    request = Object.new
+    request.stub(:mobile?).and_return(true)
+    request.stub(:user_agent).and_return("")
+    config = OpensocialWap::Config::DynamicUrl.new(request)
+    config.container_host.should be_present
+  end
 end
