@@ -24,7 +24,7 @@ module OpensocialWap
         end
 
         # URLを構築.
-        @url = query_parameters.delete("api_endpoint") || @oauth_helper.api_endpoint.dup
+        @url = query_parameters.delete("api_endpoint") || query_parameters.delete(:api_endpoint) || @oauth_helper.api_endpoint.dup
         @url << '/' if @url[-1] != '/'
         @url << args.join('/')
         unless query_parameters.empty?
