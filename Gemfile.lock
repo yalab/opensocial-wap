@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    opensocial-wap (0.0.8)
+    opensocial-wap (0.0.9)
       oauth
       rack (>= 1.2.1)
 

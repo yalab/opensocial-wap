@@ -13,6 +13,11 @@ require 'opensocial-wap/routing/url_formatter'
 require 'opensocial-wap/rack/opensocial_oauth'
 require 'opensocial-wap/rack/request'
 
+require "active_support/core_ext/object"
+require "active_support/core_ext/string"
+require "active_support/core_ext/array"
+require "active_support/core_ext/hash"
+
 if defined?(::Rails::Railtie)
   require 'opensocial-wap/railtie'
 end
