@@ -32,6 +32,7 @@ module OpensocialWap::OAuth::Client
             'point_code'          => options[:point_code],          # "7HBcfrCFnpHf7nCew3sy"
             'status'              => options[:status],              # "10"
             'updated'             => options[:updated],             # "2009-09-03T06:34:29Z"
+            'oauth_body_hash'     => options[:oauth_body_hash],     # Digest::SHA1.base64digest(str) の結果
           }.reject { |k,v| v.blank? }
         end
       end
