@@ -26,13 +26,9 @@ module OpensocialWap::OAuth::Client
             'xoauth_requestor_id'    => options[:xoauth_requestor_id], # 追加
 
             # mixi課金対応
+            # mixiの課金用に用意したbody_hashに置き換える
             # http://developer.mixi.co.jp/appli/spec/mob/payment_api/
-            'opensocial_app_id'   => options[:opensocial_app_id],   # "1"
-            'opensocial_owner_id' => options[:opensocial_owner_id], # "1"
-            'point_code'          => options[:point_code],          # "7HBcfrCFnpHf7nCew3sy"
-            'status'              => options[:status],              # "10"
-            'updated'             => options[:updated],             # "2009-09-03T06:34:29Z"
-            'oauth_body_hash'     => options[:oauth_body_hash],     # Digest::SHA1.base64digest(str) の結果
+            'oauth_body_hash' => options[:oauth_body_hash],  # Digest::SHA1.base64digest(str) の結果
           }.reject { |k,v| v.blank? }
         end
       end
