@@ -1,6 +1,7 @@
 require 'opensocial-wap/config/oauth'
 require 'opensocial-wap/config/url'
 require 'opensocial-wap/config/dynamic_url'
+require 'opensocial-wap/config/gree_dynamic_url'
 require 'opensocial-wap/oauth/helpers/base'
 require 'opensocial-wap/oauth/request_proxy/oauth_rack_request_proxy'
 require 'opensocial-wap/oauth/request_proxy/oauth_rack_request_proxy_for_mixi'
