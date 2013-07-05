@@ -20,6 +20,14 @@ module OpensocialWap
         end
       end
 
+      def default
+        {:format => :query, :params => {:guid => "ON"}}
+      end
+
+      def redirect
+        {:format => :full, :params => {:guid => "ON"}, :container_host => container_host}
+      end
+
       def redirect
         {:format => :local}
       end
