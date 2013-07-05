@@ -10,11 +10,13 @@ require 'opensocial-wap/action_controller/controller_hook'
 require 'opensocial-wap/action_controller/metal/redirecting'
 require 'opensocial-wap/session/opensocial_wap_sid'
 require 'opensocial-wap/platform'
-require 'opensocial-wap/platform/gree'
+# require 'opensocial-wap/platform/gree'
+# require 'opensocial-wap/platform/mixi'
+# require 'opensocial-wap/platform/mixi2'
+# require 'opensocial-wap/platform/mobage'
+
 require 'opensocial-wap/platform/gree2'
-require 'opensocial-wap/platform/mixi'
-require 'opensocial-wap/platform/mixi2'
-require 'opensocial-wap/platform/mobage'
+require 'opensocial-wap/platform/mobage2'
 
 module OpensocialWap
   class Railtie < Rails::Railtie
