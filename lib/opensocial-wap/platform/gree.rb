@@ -14,7 +14,7 @@ module OpensocialWap
       # container_host  = @sandbox ? 'mgadget-sb.gree.jp' : "mgadget.gree.jp"
       api_endpoint    = @sandbox ? 'http://os-sb.gree.jp/api/rest/' : "http://os.gree.jp/api/rest/"
 
-      OpensocialWap::OAuth::Helpers::BasicHelper.configure do
+      OpensocialWap::OAuth::Helpers::GreeHelper.configure do
         proxy_class     OpensocialWap::OAuth::RequestProxy::OAuthRackRequestProxyForGree
         consumer_key    consumer_key
         consumer_secret consumer_secret
@@ -23,7 +23,7 @@ module OpensocialWap
       end
 
       @config.opensocial_wap.oauth = OpensocialWap::Config::OAuth.configure do
-        helper_class OpensocialWap::OAuth::Helpers::BasicHelper
+        helper_class OpensocialWap::OAuth::Helpers::GreeHelper
       end
 
       @config.opensocial_wap.url = proc{|context| OpensocialWap::Config::GreeDynamicUrl.new(context, @sandbox)}
