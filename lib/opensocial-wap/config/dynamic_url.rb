@@ -15,7 +15,7 @@ module OpensocialWap
       end
 
       def container_host
-        if request.mobile? && request.user_agent.to_s.match(/test/i)
+        if request.respond_to?(:mobile?) && request.mobile? && request.user_agent.to_s.match(/test/i)
           "ma.test.mixi.net"
         else
           "ma.mixi.net"
@@ -23,7 +23,7 @@ module OpensocialWap
       end
 
       def default
-        if request.mobile?
+        if request.respond_to?(:mobile?) && request.mobile?
           {:format => :query, :params => {:guid => "ON"}}
         else
           {:format => :local}
