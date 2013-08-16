@@ -12,13 +12,15 @@ module OpensocialWap
       consumer_key    = @consumer_key
       consumer_secret = @consumer_secret
       app_id          = @app_id
-      api_endpoint    = @sandbox ? 'http://sbx-osapi.dmm.com/social/rest/' : "https://osapi.dmm.com/social/rest/"
+      api_endpoint    = @sandbox ? 'http://sbx-osapi.dmm.com/social/rest/' : 'https://osapi.dmm.com/social/rest/'
+      sp_api_endpoint = @sandbox ? 'http://sbx-osapi.dmm.com/social_sp/rest/' : 'https://osapi.dmm.com/social_sp/rest/'
 
       OpensocialWap::OAuth::Helpers::GreeHelper.configure do
         proxy_class     OpensocialWap::OAuth::RequestProxy::OAuthRackRequestProxyForGree  # GREEと同仕様
         consumer_key    consumer_key
         consumer_secret consumer_secret
         api_endpoint    api_endpoint
+        sp_api_endpoint sp_api_endpoint
         app_id          app_id
       end
 
