@@ -12,6 +12,8 @@ require 'opensocial-wap/session/opensocial_wap_sid'
 require 'opensocial-wap/platform'
 require 'opensocial-wap/platform/gree'
 require 'opensocial-wap/platform/mobage'
+require 'opensocial-wap/platform/dmm'
+require 'opensocial-wap/platform/dmm_adult'
 
 module OpensocialWap
   class Railtie < Rails::Railtie
