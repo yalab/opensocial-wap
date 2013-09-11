@@ -3,22 +3,27 @@
 # ActionView::Helpers::AssetTagHelper を拡張.
 module OpensocialWap
   module Helpers
-    module AssetTagHelper
+    module AssetUrlHelper
       include UrlHelper
       include ::ActionView::Helpers::AssetTagHelper
 
-      # compute_public_path を上書き.
+      # compute_asset_path を上書き.
       # 初期化時に、opensocial_wap[:url] でURL形式が指定されていれば、パスを
       # OpenSocial 用のものに書き換える.
-      def compute_public_path(source, dir, ext = nil, include_host = true)
+      def compute_asset_path(source, options = {})
         path = super
         if default_url_settings
           # public_path で指定されているオプションを使用する.
-          url_settings = default_url_settings.public_path
+          if default_url_settings.kind_of? Proc
+            url_settings = default_url_settings.call(self).public_path
+          else
+            url_settings = default_url_settings.public_path
+          end
           path = url_for(path, url_settings)
         end
         path
       end
+
     end
   end
 end

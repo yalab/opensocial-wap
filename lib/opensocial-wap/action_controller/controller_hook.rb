@@ -6,7 +6,7 @@ module ActionController
     include ::OpensocialWap::Routing::UrlFor
     helper ::OpensocialWap::Helpers::UrlHelper
     helper ::OpensocialWap::Helpers::FormTagHelper
-    helper ::OpensocialWap::Helpers::AssetTagHelper
+    helper ::OpensocialWap::Helpers::AssetUrlHelper
 
     class_attribute :opensocial_wap_enabled
     class_attribute :url_settings

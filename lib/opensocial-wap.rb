@@ -24,6 +24,10 @@ require "active_support/core_ext/array"
 require "active_support/core_ext/hash"
 
 if defined?(::Rails::Railtie)
+  if Rails.version < '4'
+    class OpensocialWapError < StandardError; end
+    raise OpensocialWapError, "OpenspcialWap #{OpensocialWap::VERSION} does not support Rails version < 4.0"
+  end
   require 'opensocial-wap/railtie'
 end
 

@@ -22,7 +22,7 @@ module OpensocialWap
       private
 
       # form_tag のHTMLオプションを計算する.
-      def html_options_for_form(url_for_options, options, *parameters_for_url)
+      def html_options_for_form(url_for_options, options)
         # Jpmobileとの互換性のため、accept_charset を変更できるように.
         accept_charset = "UTF-8"
         if defined?(::Jpmobile)
@@ -31,17 +31,31 @@ module OpensocialWap
 
         options.stringify_keys.tap do |html_options|
           html_options["enctype"] = "multipart/form-data" if html_options.delete("multipart")
+          # The following URL is unescaped, this is just a hash of options, and it is the
+          # responsibility of the caller to escape all the values.
+          # html_options["action"]  = url_for(url_for_options)
+          # html_options["accept-charset"] = "UTF-8"
+
           # url_settings を、options から取り出す.
           url_settings = extract_url_settings(html_options)
-
-          # The following URL is unescaped, this is just a hash of options, and it is the
-          # responsability of the caller to escape all the values.
-          #html_options["action"]  = url_for(url_for_options, *parameters_for_url)
           html_options["action"]  = url_for(url_for_options, url_settings)
           html_options["accept-charset"] = accept_charset
+
           html_options["data-remote"] = true if html_options.delete("remote")
+
+          if html_options["data-remote"] &&
+              !embed_authenticity_token_in_remote_forms &&
+              html_options["authenticity_token"].blank?
+            # The authenticity token is taken from the meta tag in this case
+            html_options["authenticity_token"] = false
+          elsif html_options["authenticity_token"] == true
+            # Include the default authenticity_token, which is only generated when its set to nil,
+            # but we needed the true value to override the default of no authenticity_token on data-remote.
+            html_options["authenticity_token"] = nil
+          end
         end
       end
+
     end
   end
 end
