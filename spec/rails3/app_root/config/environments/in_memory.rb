@@ -56,6 +56,10 @@ AppRoot::Application.configure do
 
   # 以下、テスト用の設定.
   require File.expand_path("../../lib/opensocial_wap_sid_enabler", File.dirname(__FILE__))
-  config.middleware.insert_before ActiveRecord::SessionStore, OpensocialWapSidEnabler
+  if Rails::VERSION::MAJOR < 4
+    config.middleware.insert_before ActiveRecord::SessionStore, OpensocialWapSidEnabler
+  else
+    require 'activerecord/session_store'
+  end
 end
 
