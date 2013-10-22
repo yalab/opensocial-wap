@@ -11,8 +11,18 @@ module OpensocialWap
       consumer_key    = @consumer_key
       consumer_secret = @consumer_secret
       app_id          = @app_id
-      container_host  = @sandbox ? 'sb.pf.mbga.jp' : 'pf.mbga.jp'
-      api_endpoint    = @sandbox ? 'http://sb.app.mbga.jp/api/restful/v1/' : "http://app.mbga.jp/api/restful/v1/"
+      container_host  = case @type
+                        when 'sp'
+                          @sandbox ? 'sb.sp.pf.mbga.jp' : 'sp.pf.mbga.jp'
+                        else
+                          @sandbox ? 'sb.pf.mbga.jp' : 'pf.mbga.jp'
+                        end
+      api_endpoint    = case @type
+                        when 'sp'
+                          @sandbox ? 'http://sb.sp.app.mbga.jp/api/restful/v1/' : "http://sp.app.mbga.jp/api/restful/v1/"
+                        else
+                          @sandbox ? 'http://sb.app.mbga.jp/api/restful/v1/' : "http://app.mbga.jp/api/restful/v1/"
+                        end
 
       OpensocialWap::OAuth::Helpers::MobageHelper.configure do
         consumer_key    consumer_key

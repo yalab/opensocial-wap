@@ -27,5 +27,9 @@ module OpensocialWap
     def app_id(app_id)
       @app_id = app_id
     end
+
+    def type(type = nil)
+      @type = type
+    end
   end
 end
