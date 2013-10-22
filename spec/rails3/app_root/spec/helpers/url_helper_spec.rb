@@ -20,7 +20,7 @@ describe OpensocialWap::Helpers::UrlHelper do
     context "コントローラで opensocial_wap を指定している場合" do
       it "設定で指定した形式の URL を返すこと" do
         controller = OpensocialWapController.new
-        helper.stub!(:params).and_return({ :opensocial_app_id => '12345' })
+        helper.stub(:params).and_return({ :opensocial_app_id => '12345' })
         url_settings = controller.class.url_settings.default
         helper.url_for(User.new, url_settings).should == "http://container.example.com/12345/?guid=ON&url=http%3A%2F%2Ftest.host%2Fusers"
       end

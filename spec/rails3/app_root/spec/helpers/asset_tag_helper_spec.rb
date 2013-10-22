@@ -21,7 +21,7 @@ describe OpensocialWap::Helpers::AssetTagHelper do
 
       it "初期化時に指定した形式の URL を返すこと" do
         set_controller(OpensocialWapController.new)
-        helper.stub!(:params).and_return({ :opensocial_app_id => '12345' })
+        helper.stub(:params).and_return({ :opensocial_app_id => '12345' })
         helper.image_path("edit.png").should == "http://test.host/images/edit.png"
       end
     end
