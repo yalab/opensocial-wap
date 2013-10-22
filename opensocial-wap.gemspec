@@ -18,11 +18,13 @@ Gem::Specification.new do |s|
   s.add_dependency 'oauth'
   s.add_development_dependency "rspec", ">=2.5.0"
   s.add_development_dependency "rspec-rails", ">=2.5.0" 
-  s.add_development_dependency "rcov"
+  s.add_development_dependency "simplecov"
   s.add_development_dependency "rails", ">=3.0.0"
   s.add_development_dependency "sqlite3-ruby"
-  s.add_development_dependency "ruby-debug19"
+  s.add_development_dependency "debugger"
   s.add_development_dependency "capybara"
+  s.add_development_dependency 'activerecord-session_store'
+
   
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
